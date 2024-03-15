@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Models\CashFlow;
 
 class DashboardController extends Controller
 {
@@ -23,6 +24,12 @@ class DashboardController extends Controller
      */
     public function index()
     {
-        return view('dashboard');
+       // Get cash flow data
+    //    $cashFlows = CashFlow::orderBy('date')->get();
+    //    $labels = $cashFlows->pluck('date');
+    //    $data = $cashFlows->pluck('amount');
+
+       // Return dashboard view with cash flow data
+       return view('dashboard');
     }
 }

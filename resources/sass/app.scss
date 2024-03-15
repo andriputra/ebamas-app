@@ -32,10 +32,13 @@ ul{
     }
 }
 .navbar{
-    margin-left: 250px;
-    transition: margin-left 0.3s ease;
+    padding-left: 250px;
+    transition: padding-left 0.3s ease;
+    position: fixed;
+    z-index: 1;
+    width: 100%;
     &.collapsed{
-        margin-left: 0px;
+        padding-left: 0px;
     }
     a{
         &.navbar-brand{
@@ -44,6 +47,12 @@ ul{
             }
         }
     }
+}
+.chart{
+    width: 100% !important;
+}
+#ContentArea{
+    padding-top: 80px !important;
 }
 .sidebar{
     position: fixed;
@@ -55,6 +64,11 @@ ul{
     transition: all 0.3s ease;
     z-index: 1000;
     background-color: $dark-color;
+    background-image: url('../../public/img/patternside.png');
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-blend-mode: multiply;
+    background-position: bottom;
     &.collapsed{
         left: -250px;
         transition: all 0.3s ease;
@@ -95,6 +109,12 @@ ul{
                     display: flex;
                 }
             }
+            &.active{
+                a{
+                    background: #646464;
+                    border-radius: 5px;
+                }
+            }
         }
     }
 }
@@ -104,5 +124,20 @@ main{
     transition: all 0.3s ease;
     &.collapsed{
         margin-left: 0px;
+    }
+}
+.dashboard{
+    .card{
+        &-header{
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            p{
+                margin-bottom: 0px;
+            }
+            .action{
+                color: inherit;
+            }
+        }
     }
 }
