@@ -6,22 +6,59 @@
 
 // Bootstrap
 @import 'bootstrap/scss/bootstrap';
-
+.developed{
+    position: absolute;
+    bottom: 10px;
+    left: 20px;
+    color: #8b8b8b;
+    font-size: 12px;
+    a{
+        color: #8b8b8b;
+        text-decoration: none;
+    }
+}
 ul{
     list-style: none;
     padding: 0px;
     margin: 0px;
 }
+.dropdown-menu-end{
+    a{
+        &.dropdown-item{
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+    }
+}
 .navbar{
     margin-left: 250px;
+    transition: margin-left 0.3s ease;
+    &.collapsed{
+        margin-left: 0px;
+    }
+    a{
+        &.navbar-brand{
+            i{
+                font-size: 24px;
+            }
+        }
+    }
 }
 .sidebar{
-    position: sticky;
+    position: fixed;
     top: 0;
     bottom: 0;
     height: 100vh;
     width: 250px;
+    left: 0;
+    transition: all 0.3s ease;
+    z-index: 1000;
     background-color: $dark-color;
+    &.collapsed{
+        left: -250px;
+        transition: all 0.3s ease;
+    }
     &-brand{
         border-bottom: 1px solid #eaeced;
         text-align: center;
@@ -59,5 +96,13 @@ ul{
                 }
             }
         }
+    }
+}
+main{
+    margin-left: 250px;
+    padding: 20px;
+    transition: all 0.3s ease;
+    &.collapsed{
+        margin-left: 0px;
     }
 }

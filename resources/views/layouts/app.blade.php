@@ -35,56 +35,60 @@
                         @guest
                             @if (Route::has('login'))
                                 <li class="nav-item">
-                                    <a class="nav-link" href="{{ route('login') }}">{{ __('Login') }}</a>
+                                    <a class="nav-link" href="{{ route('login') }}"><i class="fa-solid fa-arrow-right-to-bracket"></i> {{ __('Login') }}</a>
                                 </li>
                             @endif
 
                             @if (Route::has('register'))
                                 <li class="nav-item">
-                                    <a class="nav-link" href="{{ route('register') }}">{{ __('Register') }}</a>
+                                    <a class="nav-link" href="{{ route('register') }}"><i class="fa-solid fa-user-pen"></i> {{ __('Register') }}</a>
                                 </li>
                             @endif
                         @else
-                            <li class="nav-item dropdown">
-                                <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
-                                    {{ Auth::user()->name }}
+                        <li class="nav-item dropdown">
+                            <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
+                                {{ Auth::user()->name }}
+                            </a>
+
+                            <div class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
+                                <a class="dropdown-item" href="{{ route('logout') }}"
+                                    onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
+                                    {{ __('Logout') }} <i class="fa-solid fa-arrow-right-from-bracket"></i>
                                 </a>
 
-                                <div class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
-                                    <a class="dropdown-item" href="{{ route('logout') }}"
-                                       onclick="event.preventDefault();
-                                                     document.getElementById('logout-form').submit();">
-                                        {{ __('Logout') }}
-                                    </a>
-
-                                    <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
-                                        @csrf
-                                    </form>
-                                </div>
-                            </li>
+                                <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
+                                    @csrf
+                                </form>
+                            </div>
+                        </li>
                         @endguest
                     </ul>
                 </div>
             </div>
         </nav>
-        <aside class="sidebar" id="Sidebar">
-            <div class="sidebar-brand">
-                <a href="{{ url('/') }}">
-                    <img src="{{ asset('img/logo.png')}}" alt="logo" class="img-fluid"/>
-                </a>
-            </div>
-            <ul class="sidebar-menu">
-                <li class="sidebar-menu-item"><a href="#"><i class="fa fa-dashboard"></i>Dashboard</a></li>
-                <li class="sidebar-menu-item"><a href="#"><i class="fa fa-database"></i>Master Data</a></li>
-                <li class="sidebar-menu-item"><a href="#"><i class="fa-solid fa-file-invoice-dollar"></i>Invoice</a></li>
-                <li class="sidebar-menu-item"><a href="#"><i class="fa-solid fa-road"></i>Surat Jalan</a></li>
-                <li class="sidebar-menu-item"><a href="#"><i class="fa-solid fa-business-time"></i>Perpajakan</a></li>
-                <li class="sidebar-menu-item"><a href="#"><i class="fa-solid fa-cash-register"></i>Kwitansi</a></li>
-            </ul>
-        </aside>
-        <main class="py-4">
+        @include('layouts.sidebar')
+        
+        <main class="py-4" id="ContentArea">
             @yield('content')
+            <div class="auth-page">
+            @yield('autharea')
+            </div>
         </main>
     </div>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <script>
+        $(document).ready(function(){
+            $("#CollapseMenu").click(function(){
+                $(".sidebar").toggleClass("collapsed");
+                $(".navbar").toggleClass("collapsed");
+                $("#ContentArea").toggleClass("collapsed");
+                if ($(".navbar").hasClass("collapsed")) {
+                    $("#CollapseMenu i").removeClass("fa-ellipsis-vertical").addClass("fa-bars");
+                } else {
+                    $("#CollapseMenu i").removeClass("fa-bars").addClass("fa-ellipsis-vertical");
+                }
+            });
+        });
+    </script>
 </body>
 </html>
