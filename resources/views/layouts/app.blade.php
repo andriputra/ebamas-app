@@ -15,11 +15,13 @@
     <link href="https://fonts.bunny.net/css?family=Nunito" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" integrity="sha512-DTOQO9RWCH3ppGqcWaEA1BIZOC6xxalwEsw9c2QQeAIftl+Vegovlnee1c9QX4TctnWMn13TZye+giMm8e2LwA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/brands.min.css" integrity="sha512-8RxmFOVaKQe/xtg6lbscU9DU0IRhURWEuiI0tXevv+lXbAHfkpamD4VKFQRto9WgfOJDwOZ74c/s9Yesv3VvIQ==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-datepicker/dist/css/bootstrap-datepicker.min.css" rel="stylesheet">
 
     <!-- Scripts -->
     @vite(['resources/sass/app.scss', 'resources/js/app.js'])
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap-datepicker/dist/js/bootstrap-datepicker.min.js"></script>
 </head>
 <body>
     <div id="app">
@@ -90,7 +92,40 @@
                 }
             });
         });
+    </script>    
+    <script>
+        $(document).ready(function(){
+            // Function to add new row
+            document.getElementById('addInputBtn').addEventListener('click', function () {
+                const tableBody = document.getElementById('invoiceTable').getElementsByTagName('tbody')[0];
+                const newRow = tableBody.insertRow();
+                newRow.classList.add('invoice-row');
+                newRow.innerHTML = `
+                    <td><input type="text" class="form-control" name="deskripsi[]"></td>
+                    <td>
+                        <div class="input-group">
+                            <span class="input-group-text">Rp.</span>
+                            <input type="text" class="form-control price-currency" name="price[]" id="amountRupiah">
+                        </div>
+                    </td>
+                    <td>
+                        <div class="input-group">
+                            <span class="input-group-text">Rp.</span>
+                            <input type="text" class="form-control price-currency" name="amount[]" id="amountRupiah">
+                        </div>
+                    </td>
+                    <td>
+                        <button class="btn btn-danger" type="button" onclick="removeRow(this)"><i class="fa-solid fa-trash-can"></i></button>
+                    </td>
+                `;
+            });
+            
+            // Function to remove row
+            window.removeRow = function (button) {
+                const row = button.closest('.invoice-row');
+                row.remove();
+            };
+        });
     </script>
-    
 </body>
 </html>
