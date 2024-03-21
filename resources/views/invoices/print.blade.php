@@ -40,10 +40,16 @@
         }
         .header-info table tbody tr td.spacer{
             width: 1%;
-            padding: 0px;
+            padding: 5px 0px;
+            vertical-align: baseline;
         }
         .header-info table tbody tr td{
             padding: 5px 10px;
+            vertical-align: top;
+        }
+        .header-info table tbody tr td:first-child,
+        .header-info table tbody tr td:nth-child(4){
+            width: 15%;
         }
         .invoice-details {
             margin-bottom: 40px;
@@ -165,7 +171,6 @@
                         <td>{{ $invoice->order_no }}</td>
                     </tr>
                 </tbody>
-                
             </table>
         </div>
         <div class="invoice-details">
